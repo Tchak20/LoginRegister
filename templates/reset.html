@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+ 
+{% block title %}Login Page{% endblock %}
+ 
+{% block content %}
+<section style="margin-top: 50px;">
+  <div class="container h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-6">
+        <img src="{{ url_for('static', path='/login.jpg')}}" class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <form action="/reset" method="post">
+          <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+            <button type="button" class="btn btn-primary btn-floating mx-1">
+              <i class="fab fa-facebook-f"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-floating mx-1">
+              <i class="fab fa-twitter"></i>
+            </button>
+            <button type="button" class="btn btn-primary btn-floating mx-1">
+              <i class="fab fa-linkedin-in"></i>
+            </button>
+          </div>
+ 
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">Or</p>
+          </div>
+ 
+          <div class="form-outline mb-4">
+            <input type="text" id="username" class="form-control form-control-lg" name="newpassword" placeholder="New Password" type="text" value="" />
+            <label class="form-label" for="username">New password</label>
+          </div>
+          <div class="form-outline mb-3">
+            <input type="password" id="pass" name="confirmpassword" value="" class="form-control form-control-lg" placeholder="Confirm password" />
+            <label class="form-label" for="pass">confirm password</label>
+          </div>
+ 
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
