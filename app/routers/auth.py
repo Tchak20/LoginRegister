@@ -26,12 +26,8 @@ def signup(req: Request):
  
 @AUTH.post("/signupuser")
 def signup_user(db:Session=Depends(sess_db),username : str = Form(),email:str=Form(),password:str=Form()):
-    print(username)
-    print(email)
-    print(password)
     userRepository=UserRepository(db)
     db_user= userRepository.get_user_by_username(username)
-    print(db_user)
     if db_user:
         return "username is not valid"
  
