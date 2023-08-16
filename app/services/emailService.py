@@ -11,7 +11,7 @@ class SendEmailVerify:
  
     # create email
     msg = EmailMessage()
-    msg['Subject'] = "Email subject"
+    msg['Subject'] = "Activation du compte"
     msg['From'] = email_address
     msg['To'] = xender # type Email
     msg.set_content(
@@ -31,7 +31,7 @@ class SendEmailVerify:
 
         # create email
         msg = EmailMessage()
-        msg['Subject'] = "Email subject"
+        msg['Subject'] = "Réinitialisation du mot de passe"
         msg['From'] = email_address
         msg['To'] = xender # type Email
         msg.set_content(
