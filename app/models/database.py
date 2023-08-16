@@ -9,4 +9,4 @@ class UserModel(Base):
     password = Column(String(255), nullable=False)
     is_active = Column(Boolean, default=False)
     #role = Column(Enum('user', 'admin'), default='user')
-    reset_token = Column(String(400), nullable=False)
+    reset_token = Column(String(400), default='NULL')

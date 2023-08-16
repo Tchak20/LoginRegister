@@ -25,7 +25,6 @@ def create_access_token(user):
         payload={
             "username":user.username,
             "email":user.email,
-           # "role":user.role,
             "active":user.is_active,
             "reset_token":user.reset_token
  
