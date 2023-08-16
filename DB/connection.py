@@ -7,11 +7,11 @@ dbcon = "mysql+mysqlconnector://root:@localhost/mydatabase"
 # dbcon = 'sqlite:///fastapidb.sqlite3'
  
 engine = create_engine(dbcon)
+
+
+#Base.metadata.create_all(bind=engine)
 SessionFactory = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-Base.metadata.create_all(bind=engine)
- 
- 
 DATABASE_URL: Optional[str] = None
 SECRET_KEY: Optional[str] = "cairocoders"
  

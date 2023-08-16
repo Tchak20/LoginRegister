@@ -2,9 +2,13 @@ from passlib.context import  CryptContext #pip install passlib
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt #https://pypi.org/project/python-jose/ = pip install python-jose
 from fastapi import Depends,Request
-from fastapi import HTTPException
+import secrets
+import base64
+from sqlalchemy.orm import Session
  
-from models import UserModel
+from app.models.database import UserModel
+
+from app.services.userService import UserRepository
  
 JWT_SECRET="cairocoders$§%§$Ednalan"
 ALGORITHM="HS256"
@@ -21,8 +25,9 @@ def create_access_token(user):
         payload={
             "username":user.username,
             "email":user.email,
-            "role":user.role.value,
+           # "role":user.role,
             "active":user.is_active,
+            "reset_token":user.reset_token
  
         }
         return  jwt.encode(payload,key=JWT_SECRET,algorithm=ALGORITHM)
@@ -56,3 +61,19 @@ def get_current_user_from_cookie(request:Request) -> UserModel:
     if token:
         user = verify_token(token)
         return user
+    
+#Token reset
+def generate_reset_token(email):
+    token = secrets.token_urlsafe(32)
+    print(email)
+    print(token)
+    return token
+
+def decode_reset_token(encoded_token):
+    try:
+        token_bytes = base64.urlsafe_b64decode(encoded_token + '==')
+        decoded_token = token_bytes.decode('utf-8')
+        return decoded_token
+    except Exception as e:
+        print("Error decoding token:", e)
+        return None

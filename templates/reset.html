@@ -10,7 +10,7 @@
         <img src="{{ url_for('static', path='/login.jpg')}}" class="img-fluid" alt="Sample image">
       </div>
       <div class="col-lg-6 col-md-6">
-        <form action="/reset" method="post">
+        <form action="/new-password/{{reset}}" method="post">
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <p class="lead fw-normal mb-0 me-3">Sign in with</p>
             <button type="button" class="btn btn-primary btn-floating mx-1">
@@ -29,7 +29,7 @@
           </div>
  
           <div class="form-outline mb-4">
-            <input type="text" id="username" class="form-control form-control-lg" name="newpassword" placeholder="New Password" type="text" value="" />
+            <input type="password" id="username" class="form-control form-control-lg" name="newpassword" placeholder="New Password" type="text" value="" />
             <label class="form-label" for="username">New password</label>
           </div>
           <div class="form-outline mb-3">
