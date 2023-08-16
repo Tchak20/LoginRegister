@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from starlette.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from app.routers import auth
+from app.api.user import auth
 
 templates = Jinja2Templates(directory="templates")
  
