@@ -1,5 +1,4 @@
-from pydantic import BaseModel, EmailStr #pip install pydantic[email]
-from enum import Enum
+from pydantic import BaseModel, EmailStr
  
  
 class UserSchema(BaseModel):

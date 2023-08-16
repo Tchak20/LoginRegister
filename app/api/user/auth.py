@@ -3,9 +3,9 @@ from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from app.services.emailService import SendEmailVerify
 from app.services.userService import  UserRepository
-from app.services.scurity import COOKIE_NAME, create_access_token, decode_reset_token, generate_reset_token, get_password_hash, verify_password, verify_token
+from app.services.scurity import COOKIE_NAME, create_access_token, generate_reset_token, get_password_hash, verify_password, verify_token
 from sqlalchemy.orm import Session
-from DB.connection import  sess_db
+from db.connection import  sess_db
 from app.models.database import UserModel
 
 AUTH = APIRouter()

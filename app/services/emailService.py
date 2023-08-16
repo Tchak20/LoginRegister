@@ -6,14 +6,14 @@ from email.message import EmailMessage
 class SendEmailVerify:
  
   def sendVerify(token, xender):
-    email_address = "tchakourabastou@gmail.com" # type Email
-    email_password = "wwmbyezukejmaoyd" # If you do not have a gmail apps password, create a new app with using generate password. Check your apps and passwords https://myaccount.google.com/apppasswords
+    email_address = "tchakourabastou@gmail.com"
+    email_password = "wwmbyezukejmaoyd"
  
-    # create email
+    
     msg = EmailMessage()
     msg['Subject'] = "Activation du compte"
     msg['From'] = email_address
-    msg['To'] = xender # type Email
+    msg['To'] = xender 
     msg.set_content(
        f"""\
     verify account        
@@ -26,14 +26,13 @@ class SendEmailVerify:
             smtp.send_message(msg)
     
   def resetverify(token, xender):
-        email_address = "tchakourabastou@gmail.com" # type Email
-        email_password = "wwmbyezukejmaoyd" # If you do not have a gmail apps password, create a new app with using generate password. Check your apps and passwords https://myaccount.google.com/apppasswords
-
-        # create email
+        email_address = "tchakourabastou@gmail.com"
+        email_password = "wwmbyezukejmaoyd" 
+        
         msg = EmailMessage()
         msg['Subject'] = "Réinitialisation du mot de passe"
         msg['From'] = email_address
-        msg['To'] = xender # type Email
+        msg['To'] = xender 
         msg.set_content(
             f"""\
         Reset password        
@@ -41,7 +40,7 @@ class SendEmailVerify:
         """,
                 
         )
-        # send email
+
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(email_address, email_password)
             smtp.send_message(msg)

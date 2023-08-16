@@ -1,12 +1,7 @@
-from sqlalchemy.orm import Session
-from app.models.database import  UserModel
-from app.models.database import *
 from typing import  Dict,Any
-import smtplib
-from email.message import EmailMessage
+from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.orm import sessionmaker
-
+from app.models.database import  UserModel
 
  
 class UserRepository:
