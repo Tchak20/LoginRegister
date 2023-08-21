@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Request, Response
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from app.services.emailService import SendEmailVerify
-from app.services.userService import  UserRepository
+from app.services.userService import  User
 from app.services.scurity import COOKIE_NAME, create_access_token, generate_reset_token, get_password_hash, verify_password, verify_token
 from sqlalchemy.orm import Session
 from db.connection import  sess_db
@@ -26,7 +26,7 @@ def signup(req: Request):
  
 @AUTH.post("/signupuser")
 def signup_user(db:Session=Depends(sess_db),username : str = Form(),email:str=Form(),password:str=Form()):
-    userRepository=UserRepository(db)
+    userRepository=User(db)
     db_user= userRepository.get_user_by_username(username)
     if db_user:
         return "username is not valid"
@@ -49,7 +49,7 @@ def login(req: Request):
  
 @AUTH.post("/signinuser")
 def signin_user(response:Response,db:Session=Depends(sess_db),username : str = Form(),password:str=Form()):
-    userRepository = UserRepository(db)
+    userRepository = User(db)
     db_user = userRepository.get_user_by_username(username)
     if not db_user:
         return "username or password is not valid"
@@ -66,7 +66,7 @@ def signin_user(response:Response,db:Session=Depends(sess_db),username : str = F
  
 @AUTH.get('/user/verify/{token}')
 def verify_user(token,db:Session=Depends(sess_db)):
-    userRepository=UserRepository(db)
+    userRepository=User(db)
     payload=verify_token(token)
     username=payload.get("username")
     db_user=userRepository.get_user_by_username(username)
@@ -86,7 +86,7 @@ def verify_user(token,db:Session=Depends(sess_db)):
 
 @AUTH.post("/reset")
 def verify_mail(db:Session=Depends(sess_db),email:str=Form()):
-    userRepository = UserRepository(db)
+    userRepository = User(db)
     user = userRepository.get_user_by_email(email) 
     if user:
         token = generate_reset_token(email)
@@ -98,25 +98,25 @@ def verify_mail(db:Session=Depends(sess_db),email:str=Form()):
 
 @AUTH.get('/reset-password/{token}')
 def reset_password(request: Request,token,db:Session=Depends(sess_db)):
-    userRepository=UserRepository(db)
+    userRepository=User(db)
     payload=token
-    reset_token = userRepository.get_user_by_reset_token(payload)
+    user_to_reset = userRepository.get_user_by_reset_token(payload)
     reset_password = {
-        "reset": reset_token.username
+        "reset": user_to_reset.username
     }
-    if not reset_token:
+    if not user_to_reset:
         raise  HTTPException(
             status_code=401, detail="Credentials not correct"
         )
     else:
         return templates.TemplateResponse("reset.html", {"request": request, **reset_password})
     
-@AUTH.post('/new-password/{reset_token}')
-def new_password(reset_token,request: Request,newpassword : str = Form(),confirmpassword:str=Form(),db:Session=Depends(sess_db)):
-    userRepository=UserRepository(db)
-    reset_tokenf = userRepository.get_user_by_username(reset_token)
+@AUTH.post('/new-password/{username}')
+def new_password(username,request: Request,newpassword : str = Form(),confirmpassword:str=Form(),db:Session=Depends(sess_db)):
+    userRepository=User(db)
+    user = userRepository.get_user_by_username(username)
     if newpassword == confirmpassword:
-        reset_tokenf.password = get_password_hash(newpassword)
+        user.password = get_password_hash(newpassword)
         db.commit()
         return  templates.TemplateResponse("signin.html", {"request": request})
     else:   

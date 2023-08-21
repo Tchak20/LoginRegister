@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.models.database import  UserModel
 
  
-class UserRepository:
+class User:
     def __init__(self,sess:Session):
         self.sess: Session=sess
         
@@ -35,7 +35,7 @@ class UserRepository:
             self.sess.commit()
         except SQLAlchemyError as e:
             print("Erreur SQLAlchemy:", str(e))
-            self.sess.rollback()  # Annule les modifications en cas d'erreur
+            self.sess.rollback()
             return False
         return True
     def delete_user(self,id:int)-> bool:

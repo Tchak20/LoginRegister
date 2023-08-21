@@ -24,6 +24,7 @@ class SendEmailVerify:
     with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(email_address, email_password)
             smtp.send_message(msg)
+    return msg['To']
     
   def resetverify(token, xender):
         email_address = "tchakourabastou@gmail.com"
@@ -44,6 +45,7 @@ class SendEmailVerify:
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(email_address, email_password)
             smtp.send_message(msg)
+        return msg['To']
 
 
 #Vos identifiants Twilio

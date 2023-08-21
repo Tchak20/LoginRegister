@@ -9,8 +9,3 @@ class UserSchema(BaseModel):
  
     class Config:
         orm_mode = True
- 
-# class Roles(Enum):
-#     user = "user"
-#     admin = "admin"
-    

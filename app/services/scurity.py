@@ -12,7 +12,7 @@ JWT_SECRET="cairocoders$§%§$Ednalan"
 ALGORITHM="HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES=3000
  
-pwd_context=CryptContext(schemes=["bcrypt"],deprecated="auto") #pip install bcrypt
+pwd_context=CryptContext(schemes=["bcrypt"],deprecated="auto") 
 # save token to oauth2_scheme
 oauth2_scheme=OAuth2PasswordBearer(tokenUrl="user/signin")
 COOKIE_NAME="Authorization"
